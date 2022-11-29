@@ -40,7 +40,11 @@ namespace SpaceGames.UserService.Api.Services
         // Home work NickName
         public async Task RegisterUser(SignUpRequestModel signUpModel)
         {
-           // HW verify signUpModel.NickName is unique
+            var nicknameExist = await _repository.GetByNickName(signUpModel.NickName);
+            if(nicknameExist != null)
+            { 
+                throw new ApiException($"Nick is not available", ExceptionType.OperationException);
+            }
 
             var attributes = new Dictionary<string, string>
             {

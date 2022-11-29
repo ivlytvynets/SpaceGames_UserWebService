@@ -35,6 +35,12 @@ namespace SpaceGames.UserService.Api.Services
         // verify nick name is unique.
         public async Task AddUser(string email, UserProfileRequestModel userModel)
         {
+            var nicknameExist = await _userRepository.GetByNickName(userModel.NickName);
+            if (nicknameExist != null)
+            {
+                throw new ApiException($"Nick is not available", ExceptionType.OperationException);
+            }
+            
             var user = new User
             {
                 Email = email,
@@ -53,11 +59,15 @@ namespace SpaceGames.UserService.Api.Services
         // Home work NickName verify nick name is unique. 
         public async Task UpdateUser(string email, UserProfileRequestModel userModel)
         {
+            var nicknameExist = await _userRepository.GetByNickName(userModel.NickName);
+            if (nicknameExist != null)
+            {
+                throw new ApiException($"Nick is not available", ExceptionType.OperationException);
+            }
+            
             var user = await GetUser(email);
             user.NickName = userModel.NickName;
             await _userRepository.Update(user);
-
-            //throw new ApiException($"Nick is not available", ExceptionType.OperationException);
         }
 
         public async Task UpdateUser(string email, UserAvatarRequestModel userModel)
@@ -113,7 +123,10 @@ namespace SpaceGames.UserService.Api.Services
         // Home work
         public async Task DeleteUser(string email)
         {
-            // adding logic for delete
+            var user = await _userRepository.GetById(email);
+            if (user == null)
+                throw new NullReferenceException("User is not found");
+            await _userRepository.Delete(user);
         }
     }
 }

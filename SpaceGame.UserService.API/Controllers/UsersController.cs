@@ -65,8 +65,21 @@ namespace SpaceGames.UserService.Api.Controllers
         [HttpDelete("{email}")]
         public async Task<IActionResult> DeleteUser([FromRoute]string email)
         {
-            // delete from DynamoDB calling _userService
-            // delete from Cognito using CognitoUserManager
+            CognitoIdentityHelper.TryGetEmailFromClaim(User, out var emailFromToken);
+            
+            if (email != emailFromToken)
+            {
+                return Forbid();
+            }
+
+            var cognitoUser = await _userManager.FindByNameAsync(emailFromToken);
+            if (cognitoUser == null)
+            {
+                return NotFound("Cognito user is not found");
+            }
+            
+            await _userManager.DeleteAsync(cognitoUser);
+            await _userService.DeleteUser(email);
 
             return Ok();
         }
