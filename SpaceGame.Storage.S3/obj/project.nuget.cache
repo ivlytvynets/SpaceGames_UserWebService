@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6bKe3mFbXUsaRwAORxOQtDyvr5kA5D0UMkp4uW11QKFsACZhibL1twacTw26BZqg4YUd1UF0XfadwNY8mhqBeA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ivan_Lytvynets\\Downloads\\NET homework\\SpaceGame.Storage.S3\\SpaceGame.Storage.S3.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ivan_Lytvynets\\.nuget\\packages\\awssdk.core\\3.7.13.4\\awssdk.core.3.7.13.4.nupkg.sha512",
+    "C:\\Users\\Ivan_Lytvynets\\.nuget\\packages\\awssdk.s3\\3.7.9.53\\awssdk.s3.3.7.9.53.nupkg.sha512",
+    "C:\\Users\\Ivan_Lytvynets\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
